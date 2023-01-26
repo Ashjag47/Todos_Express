@@ -72,6 +72,26 @@ app.put("/tasks/:id", function (req, res) {
   res.status(201).send(todos);
 });
 
+// To delete or remove all done tasks
+app.delete("/tasks", function (req, res) {
+  console.log("in /tasks delete");
+  if (req.params.id >= todos.length) {
+    res.status(404).send("data not exists");
+  } else {
+    let deIndex = 0;
+    todos.forEach(todo => {
+      if (todo.isCompleted) {
+        done.push(todo);
+        todos.splice(Number(todo.id), 1);
+        deIndex += 1;
+      } else {
+        todo.id = String(Number(todo.id) - deIndex);
+      }
+    });
+    res.status(200).send(todos);
+  }
+});
+
 app.listen(port, () => {
   console.log(`http://${hostname}:${port}`);
 });
