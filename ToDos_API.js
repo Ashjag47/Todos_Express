@@ -65,6 +65,13 @@ app.get("/tasks/:id", function (req, res) {
   }
 });
 
+// To mark as done or undone
+app.put("/tasks/:id", function (req, res) {
+  console.log("in /tasks/id put");
+  todos[req.params.id].isCompleted = !(todos[req.params.id].isCompleted);
+  res.status(201).send(todos);
+});
+
 app.listen(port, () => {
   console.log(`http://${hostname}:${port}`);
 });
