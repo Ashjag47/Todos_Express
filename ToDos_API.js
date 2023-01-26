@@ -54,6 +54,17 @@ app.get("/tasks/done", (req, res) => {
   res.status(200).send(d);
 });
 
+// To display particular task in todos
+app.get("/tasks/:id", function (req, res) {
+  console.log("in /tasks/id get");
+  console.log(req.params.id);
+  if (req.params.id >= todos.length) {
+    res.status(404).send("data not exists");
+  } else {
+    res.status(200).send(todos[req.params.id]);
+  }
+});
+
 app.listen(port, () => {
   console.log(`http://${hostname}:${port}`);
 });
