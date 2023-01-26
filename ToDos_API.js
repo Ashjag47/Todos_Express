@@ -26,6 +26,18 @@ app.get("/tasks", (req, res) => {
   res.status(200).send(todos);
 });
 
+// To create task in todos list
+app.post("/tasks", (req, res) => {
+  console.log("in /tasks POST");
+  todos.push({
+    ...req.body,
+    id: todos.length,
+    isCompleted: false
+  });
+  res.status(201).send(todos);
+});
+
+
 
 app.listen(port, () => {
   console.log(`http://${hostname}:${port}`);
